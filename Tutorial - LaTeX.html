@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>latex_tutorial</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+body
+{
+        line-height: 1.4em;
+        color: black;
+        padding: 1em;
+        margin: auto;
+        max-width: 42em;
+        font-family: Verdana, Arial;
+}
+p, ul, ol, dl, table, pre {
+        margin: 15px 0;
+}
+h1
+{
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+}
+h2
+{
+        margin-top: 1em;
+        margin-bottom: 0.5em;
+        border-bottom: 1px solid #000080 !important;
+        padding-bottom: 2px;
+}
+h4
+{
+        font-style: italic;
+        color: #555555;
+        margin-bottom: 0.1em;
+        margin-top: 0.1em;
+}
+pre
+{
+        background-color: #f8f8f8;
+        border: 1px solid #2f6fab;
+        border-radius: 3px;
+        overflow: auto;
+        padding: 5px;
+        font-family: monospace;
+}
+pre code
+{
+        background-color: inherit;
+        border: none;
+        padding: 0;
+        font-family: monospace;
+}
+code
+{
+        background-color: #f8f8f8;
+        border: 1px solid #2f6fab;
+        border-radius: 3px;
+        padding: 0 0.2em;
+        font-family: monospace;
+}
+a
+{
+        text-decoration: none;    
+}
+a:hover
+{
+        text-decoration: underline;
+}
+blockquote
+{
+        border-left: 4px solid #888899;
+        padding: 0 15px;
+        color: #888899;
+        margin: 15px 15px;
+        font-family: Georgia, Helvetica;
+}
+blockquote>:first-child
+{
+        margin-top: 2px;
+}
+blockquote>:last-child
+{
+        margin-bottom: 2px;
+}
+hr
+{
+        clear: both;
+        margin: 15px 0;
+        height: 0px;
+        overflow: hidden;
+        border: none;
+        background: transparent;
+        border-bottom: 2px solid #2f6fab;
+        padding: 0;
+}
+img
+{
+        max-width: 100%
+}
+table
+{
+        border-collapse: collapse;
+        margin-left: 10px;
+}
+th
+{
+        border: 1px solid #2f6fab;
+        padding: 3px 7px 2px 7px;
+        font-size: 1.1em;
+        text-align: left;
+        padding-top: 5px;
+        padding-bottom: 4px;
+        background-color: #f8f8f8;
+}
+td
+{
+        border: 1px solid #2f6fab;
+        padding: 3px 7px 2px 7px;
+}
+ul
+{
+        list-style-type: square;
+}
+
+</style>
+</head>
+<body>
+<h1>A quick guide to LaTeX</h1>
+<h4>by: Patrick Lambert [http://dendory.net]</h4>
+<h4>Last update: 10/28/2014 18:14:23</h4>
+<h2>Introduction</h2>
+<p>LaTeX is one of those things that's well known in a couple of specific  fields such as mathematics, physics, philosophy and others. But for many, it can be a perfectly good replacement for common word processing applications. LaTeX is a typesetting system for the publication of documents. Few people learn of it because word processors tend to be far more approachable. Yet, this language has a lot of interesting benefits:</p>
+<ul>
+<li>It's text-based, which means a <code>.tex</code> document can be created and edited in any text editor, on any system, without requiring a specific word processor.</li>
+<li>It uses macros to automate tasks.</li>
+<li>It's very good at creating output for various formats and devices like PDF or enterprise printers used by publishing houses.</li>
+<li>It handles international languages and symbols very well.</li>
+</ul>
+<p>However it also has a few drawbacks:</p>
+<ul>
+<li>It's a heavy, complex language with a steep learning curve.</li>
+<li>It's not WYSIWYG.</li>
+</ul>
+<p>LaTeX is a vast subject and this document certainly won't cover it all. There are lots of great guides available online focusing on various parts of the language. Instead, here we will focus on getting started quickly to write general purpose documents and convert them to PDF format. We will also cover a few tips that will help make your LaTeX experience better, such as automated tools and better presentation packages.</p>
+<p>Before getting started it's useful to realize what LaTeX is good at. While you could use it to create any type of document, that's probably not wise. More often than not, you should use it if you want to create medium to long form content. If you expect your content to be in PDF or printed form, this will work perfectly for you. Whether you're writing documentation for a product, a school paper, a business report, or anything similar, then once you learn LaTeX you will find it quite good at these tasks.</p>
+<h2>Software packages</h2>
+<p>The first thing to learn about LaTeX, and TeX in general, is that this language is very old and has evolved over time. It was first created in the 1980s and as such many different engines have appeared. You may see references to tools such as <em>XeLaTeX</em>, <em>LuaLaTeX</em>, <em>PDFLaTeX</em> and more. Each of these can handle a typical <code>.tex</code> file but they focus on specific areas. They each come with their own macros, and are thus aimed for a specific type of document. For example, <em>LuaTeX</em> is a LaTeX extension implementing the Lua scripting language.</p>
+<p>To convert a <code>.tex</code> file into a PDF or PostScript file, the two most common output formats for LaTeX, you need to basically <em>compile</em> the code you write into the wanted format. Instead of learning all the commands, I highly suggest you download <a href="http://www.xm1math.net/texmaker/" title="Texmaker">Texmaker</a>, a visual LaTeX editor for Windows, OS X and Linux. This will allow you to write your document with syntax highlighting, see a live preview, and handle everything at the touch of a button.</p>
+<p>Now that you have a proper interface, you still need to download the LaTeX package itself, since all Texmaker will do is run these commands in the background. If you're on Windows, I suggest <a href="http://miktex.org/" title="MiKTeX">MiKTeX</a> which comes with an easy installer. Simply follow the instructions to get it installed and added to your <em>PATH</em> so Texmaker can detect it. You may need to restart in order for the settings to take effect.</p>
+<p>On Linux, each distribution comes with LaTeX packages and you should refer to your distribution's documentation to know the exact names.</p>
+<h2>First document</h2>
+<p>Now that you have a LaTeX package installed and Texmaker opened, create a new document and paste in the following code:</p>
+<pre><code>\documentclass[12pt]{article}
+\usepackage[english]{babel}
+
+\begin{document}
+
+\section{Introduction}
+Hello world.
+
+\end{document}
+</code></pre>
+
+<p>This is pretty much the least amount of code you can write to have a complete document. As you can see, LaTeX is a series of commands starting with <code>\</code> that tells the engine what to render on the screen. You can also insert those commands from the Texmaker graphical interface by going to the <strong>LaTeX</strong> menu at the top of the screen.</p>
+<p>In the toolbar, next to the right arrow where it says <strong>LaTeX</strong>, use the down arrow and select <strong>PDFLaTeX</strong> instead, then click on it. This will compile the document into a PDF, bypassing the intermediary step that LaTeX usually does, converting from TeX to DVI and then to PDF. After that, press the button next to it which says <strong>View PDF</strong>. Your document should appear:</p>
+<p><img src="http://i.imgur.com/DDrxpdz.jpg" alt="Screenshot 1" /></p>
+<p>If it doesn't work, look at the log in the bottom of the middle pane to see the errors. Every time you compile your document, that log will show what happens behind the scenes. You will likely see a lot of warnings about text out of bound, but any red error may prevent the PDF from being created and has to be addressed.</p>
+<p>Let's quickly go over the code we've entered. Every document starts with <code>\documentclass{}</code>. This is a macro, just like every other escaped command you see in the code above. Here, we're starting an <em>article</em> class, and passing the option <em>12pt</em> which is simply the font size. The next line uses the <code>\usepackage{}</code> macro. We specify the exact package to use, in this case <em>babel</em>, and pass on a variable, in this case <em>english</em>. This package includes utilities to parse various languages for your document.</p>
+<p>If you've done any coding or scripting in the past, this should be very easy. Even if not, it's not hard to extrapolate what the two lines we've seen are about. As you may already have realized, changing the font size is simply a matter of changing <em>12pt</em> to <em>14pt</em> or any other point value you want on the first line. Similarly, if you're writing a document in french, then you can change the <em>english</em> statement for <em>french</em>. There are many other headers we can use here, and we'll see several more in time.</p>
+<p>For the rest of the example above, we have a <code>\begin{}</code> statement, some more stuff, then a <code>\end{}</code> statement. These are used to tell LaTeX about a block of code. There are many things we can begin and end, such as centering text or doing syntax highlighting. In this case, we specify where the <em>document</em> starts, and where it ends. So anything in between those two lines will be part of the document itself, and anything before that block is part of the headers.</p>
+<p>The <code>\section{}</code> line is used to write a new section title, in this case <em>Introduction</em>, then we have the sentence <code>Hello world.</code> which simply writes the text in that section. There are many macros used for chapters, sections, sub-sections, paragraphs, and so on.</p>
+<h2>Paragraphs and fonts</h2>
+<p>Let's write some more of our document. Clear what's in your Texmaker window, and paste the following:</p>
+<pre><code>\documentclass[12pt]{article}
+\usepackage[english]{babel}
+
+\begin{document}
+
+\section{Introduction}
+
+This document is simply for testing purposes. As such, nothing much will be of use here, but we will learn a lot while writing this code.
+
+If this were a real document, there would likely be far more text. However, this is all I could come up with in such short notice. Hopefully it will be enough to demonstrate the concepts we need.
+
+\clearpage
+
+\section{Conclusion}
+
+Hopefully we have learned quite a lot from these tags, macros and other LaTeX concepts. Have a nice day!
+
+\end{document}
+</code></pre>
+
+<p>Once again, click the <strong>PDFLaTeX</strong> button then refresh the PDF view. Here we have the same basic structure, but we've added some more text. If you notice on the preview, several things have happened. First, each paragraph now has blank lines in-between, and has its first word indented. This is what the empty lines do, or you can use the <code>\par</code> primitive. This is a basic TeX command which tells the engine that a paragraph is about to start. You can change what the start of each paragraph looks like in the header, such as how many characters the indenting should be, and so on. The ability to control all of this precisely is what makes LaTeX so powerful.</p>
+<p>The other new primitive here is <code>\clearpage</code>. Typically, we would let our document flow from one page to the next, but to demonstrate pages we've added this command so we would have two separate pages. This allows us to see another useful feature of LaTeX, the automatic page numbering added in the footer. Again, this is something we can modify.</p>
+<p>First however, let's make our document look better. By default, LaTeX provides a number of built-in font packages, but you may want to use more modern OpenType or TrueType fonts installed on your system. To use modern fonts, we will need to change from <em>PDFLatex</em> to <em>XeLaTeX</em>. Add the following headers just before your <code>\begin{document}</code> line:</p>
+<pre><code>\usepackage{fontspec}
+\setmainfont{Verdana}
+</code></pre>
+
+<p>Compile it with <em>XeLaTeX</em> and once you <em>View PDF</em>, you should notice the font looks quite a bit better. You can experiment with various fonts here such as <em>Arial</em> or <em>Tahoma</em>. This engine allows you to use any font installed on your local machine.</p>
+<p>To accomplish this, we've loaded another package here called <em>fontspec</em> and used one of its macros, <code>\setmainfont{}</code>. This is a good time to talk about packages. LaTeX has hundreds of packages available that affect how your document will look like. If you're on Windows, you can manage those packages by using <strong>MiKTeX Package Manager</strong>. There's also an online package repository called <a href="http://www.ctan.org/" title="CTAN">CTAN</a> which you can use to browse available packages.</p>
+<h2>Margins, graphics, bold and italic</h2>
+<p>Let's quickly go over various other headers you may want to use to improve your document. First, let's edit the margins:</p>
+<pre><code>\usepackage{geometry}
+\geometry{a4paper, right=30mm, left=30mm, top=35mm, bottom=25mm}
+</code></pre>
+
+<p>Again, we're simply loading a package and using one of its macros, specifying some options such as the paper type and the margins for each side of the document. This macro accepts a number of options, such as <em>landscape</em> to have a landscape document, and those margins could also be in inches instead. Then, let's change the paragraph indent and spacing:</p>
+<pre><code>\setlength{\parindent}{1em}
+\setlength{\parskip}{1em}
+</code></pre>
+
+<p>You can recompile your document and refresh the live view each time to see how this affects your document. Finally, let's add a package that will allow us to insert images:</p>
+<pre><code>\usepackage{graphicx} 
+</code></pre>
+
+<p>The <em>graphicx</em> package has various macros that make it easy to insert an image using the <code>\includegraphics{}</code> macro, with the name of the file specified. By default, the engine will look in the working folder for an image of a supported format, such as JPEG or PNG.</p>
+<p>Let's see a more complete version of our document now:</p>
+<pre><code>\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage{setspace}
+
+\usepackage{fontspec}
+\setmainfont{Verdana}   % Verdana font
+
+\usepackage{geometry}   % paper type and margins
+\geometry{a4paper, right=30mm, left=30mm, top=35mm, bottom=25mm}
+
+\setlength{\parindent}{1em}  % paragraph indent
+\setlength{\parskip}{1em}   % paragraph spacing
+
+\usepackage{graphicx}   % images package
+
+\begin{document}
+
+\tableofcontents
+
+\clearpage
+
+\section{Introduction}
+
+This document is simply for \textbf{testing purposes}. As such, \textit{nothing} much will be of use here, but we will learn a lot while writing this code.
+
+If this were a real document, there would likely be far more text. However, this is all I could come up with in such short notice. Hopefully it will be enough to demonstrate the concepts we need.
+
+\subsection{Various notes}
+\subsubsection{Audience}
+
+The \textit{audience} for this document is unrestricted.
+
+\subsubsection{Acknowledgments}
+
+We would like to \textit{thank} the makers of LaTeX to have made this tutorial possible.
+
+\clearpage
+
+\section{Conclusion}
+
+Hopefully we have learned quite a lot from these tags, macros and other LaTeX concepts. Have a nice day!
+
+\end{document}
+</code></pre>
+
+<p>As you can see the document is starting to be quite lengthy. Here we have the same code as earlier, plus the headers we've added, and a few more things. The first thing you may notice is the use of <code>%</code> characters to denote comments. This is useful to note what each command does, once your document becomes quite large. Then, you may also notice the command <code>\tableofcontents</code>. Once again we see a useful feature of LaTeX, the ability to use your sections and chapters to generate a table of content.</p>
+<p>To make the table more visually appealing, I also added some <code>\subsection{}</code> and <code>\subsubsection{}</code>. These can be used to create a tree of sections as you write your document. Here, the introduction has a subsection, which in turn has two of its own. Finally, you may notice two more macros spread throughout the text, <code>\textbg{}</code> and <code>\textit{}</code> which are used to add bold and italic.</p>
+<h2>Title page</h2>
+<p>By now you should have a good grasp of what a LaTeX document looks like. By using the previous code snippet, you can expand it and write a fairly good document. But we're still missing a few important commands to add more visually appealing objects.</p>
+<p>First, let's make a title page. Paste the following just after your <code>\begin{document}</code> tag:</p>
+<pre><code>\begin{titlepage}
+\begin{center}
+{\setstretch{2.0}
+ {\Huge My Tutorial}\\
+ {\Large My name}\\
+ \texttt{my email}\\
+ \bigskip
+ \today}
+\bigskip
+\begin{abstract}
+ Thanks to this document, I am learning LaTeX which will help create lots of documents in the future.
+\end{abstract}
+\end{center}
+\end{titlepage}
+</code></pre>
+
+<p>This may seem like a lot of code just for a title page, and there are ways to create it with less commands, but this gives you good flexibility. As you can see, we once again use <code>\begin{}</code> and <code>\end{}</code> to create a <em>titlepage</em>, and also to <em>center</em> everything. Then, we set a bigger spacing between each line with <code>\setstretch{2.0}</code> which is part of the <em>setspace</em> package.</p>
+<p>On the next two lines we see macros that are used to change font size. You may remember how we set the default font point size at the start of the document, but you can still enlarge a section of text or make it smaller with commands like <code>\Huge{}</code> and <code>\Large{}</code>. Here is a full list, from smallest to biggest:</p>
+<ul>
+<li><code>\tiny</code></li>
+<li><code>\scriptsize</code></li>
+<li><code>\footnotesize</code></li>
+<li><code>\small</code></li>
+<li><code>\normalsize</code></li>
+<li><code>\large</code></li>
+<li><code>\Large</code></li>
+<li><code>\LARGE</code></li>
+<li><code>\huge</code></li>
+<li><code>\Huge</code></li>
+</ul>
+<p>We also modify the font family for the email using <code>\texttt{}</code> to set a true-type font. Similar to font size, you can modify a section of text to change the font family.</p>
+<p>Because this is a title page, we need a lot of spacing. You can see the <code>\\</code> sequence to indicate that even though we aren't starting a new paragraph with <code>\par</code> or a blank line, we still want the line to end. You can use that sequence any time you want a single line of text by itself. <code>\bigskip</code> is then used to insert a certain amount of vertical space. You could control exactly how much vertical space to insert with <code>\vspace{length}</code>. Finally, we use the <em>abstract</em> section to define what the document will be about.</p>
+<p>This starting page looks like this:</p>
+<p><img src="http://i.imgur.com/5CgxvJk.jpg" alt="Screenshot 2" /></p>
+<h2>Lists and tables</h2>
+<p>Lets end this tutorial with a couple more concepts. Lists, for example, are very easy to do. There are two types of lists, first the <em>itemize</em> list:</p>
+<pre><code>\begin{itemize}
+ \item The princess must be in another castle.
+ \item Perhaps this castle is not the right one.
+\end{itemize}
+</code></pre>
+
+<p>And also the <em>enumerate</em> list:</p>
+<pre><code>\begin{enumerate}
+ \item First task.
+ \item Second task.
+\end{enumerate}
+</code></pre>
+
+<p>Tables on the other hand can be more complicated:</p>
+<pre><code>\bgroup
+\def\arraystretch{1.3}
+\begin{tabular}{ |p{50mm}|p{50mm}|p{30mm}| }
+ \hline
+ First name &amp; Last name &amp; Age\\
+ \hline
+ John &amp; Doe &amp; 28\\
+ Mary &amp; Smith &amp; 26\\
+ Jane &amp; Levant &amp; 34\\
+ \hline
+\end{tabular}
+\egroup
+</code></pre>
+
+<p>Here, the first thing we do is group the whole block of code together with <code>\bgroup</code> and <code>\egroup</code>. This is equivalent to using <code>{ }</code> as we've done in the past, for example in the title page. Then, we define line spacing to be <em>1.3</em> so that our table looks better, and we being a <em>tabular</em> section, which is the table itself. The argument passed is the table definition, which is a list of columns, how the text should be centered, and how large the columns should be, each divided with <code>|</code> characters.</p>
+<p>In our case, we define three columns, the first two are <em>50mm</em> and the last is <em>30mm</em>. The text is going to be top-aligned which is what the three <code>p</code> characters mean. After that, we add horizontal lines with <code>\hline</code> and define all of the rows. Here are a couple more examples of table definitions:</p>
+<ul>
+<li><code>\begin{tabular}{||c c c c||}</code> This creates a table with four columns, center-aligned, with two lines on the left and two on the right, no lines between cells.</li>
+<li><code>\begin{tabular}{|l|l|r|}</code> This creates a table with three columns, the first two being left-aligned, with the last being right-aligned.</li>
+<li><code>\begin{tabular}{ m m }</code> Finally this table has two columns, the text middle-aligned, with no lines at all.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>There's a lot more we could cover, such as advanced options for the concepts we've seen, math functions, bibliographies, code listings, and so on. But the purpose of this tutorial was a quick introduction to LaTeX as an everyday word processing option. Hopefully, you should now be able to create many types of documents. As you expand your use of the language, you will no doubt want to research more commands, and there are a lot of online resources that can be used for that.</p>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

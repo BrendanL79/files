@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Making a .NET Windows app without using Visual Studio</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>Making a .NET Windows app without using Visual Studio</h1>
+<h3>by: Patrick Lambert</h3>
+<h3>Last update: 12/22/2015</h3>
+<hr />
+<h3>Introduction</h3>
+<p>If you have any experience working with Windows development, the first thing you may be asking yourself is, why would you want to create Windows applications without using Microsoft Visual Studio? Truthfully, if you aim to become a professional developer, or even wish to get the full experience of the Windows development environment, then you probably don't want to proceed this way. Visual Studio Community is free, integrates with a myriad of things, and tons of people use it. However, there are reasons why you might want to do this. First, maybe you're curious about what really goes on behind the scenes when you press the <em>Build</em> button and wish to see the creation of an app from scratch without anything hidden by the GUI. Maybe you just can't install Visual Studio because of the platform or environment you work on. Or perhaps you just personally hate having to use a <em>5GB</em> Integrated Development Environment (IDE) to create a <em>5KB</em> app. Regardless of the reason, if you've always wanted to make a Windows binary but don't want to spend the time to download and learn VS, then read on.</p>
+<h3>Dependencies</h3>
+<p>For this tutorial, we're going to use C# with the .NET Framework. So if we aren't going to download Visual Studio, what do we need to create a .NET application? The great news is that as long as you have the <a href="http://www.microsoft.com/en-us/download/details.aspx?id=21">Microsoft .NET Framework</a> installed on your system, you don't need anything else! And chances are, you already have it installed, since so many things require it. To find out, go to <code>C:\Windows\Microsoft.NET\Framework</code> and see for yourself. Chances are you have more than one version, too. If you go in one of the sub folders, and for this tutorial we'll use the <code>3.5</code> framework, although you can use any version you want, then you will find several binaries.</p>
+<p>The .NET Framework actually comes with a C# compiler by default. That means you have a fully functional compiler already on your system, without even knowing it. For our purposes, there are two binaries that we're going to see: <code>csc.exe</code> which is the C# compiler, and <code>msbuild.exe</code> which is the utility that reads Project files (<code>.csproj</code>) and compiles them. That means even if someone sends you a Visual Studio project, you can run <code>msbuild</code> on it and compile the source without ever installing Visual Studio (in most cases).</p>
+<h3>The structure of a project</h3>
+<p>Our test app is going to be very simple, so we won't make a project file, but it's good to know the typical structure that starting a new Visual Studio project creates, to help you understand some concepts. When you make a new app, the IDE creates a number of files, based on the type of app you want to make. Typically, these includes <code>Program.cs</code> which is your main C# source code, <code>ProjectName.csproj</code> which contains information about the resources your source depends on, <code>assemblyinfo.cs</code> which contains the binary name, version, copyright and so on, and finally <code>App.config</code> which contains custom configuration.</p>
+<p>As I've mentioned, we won't use a project file so we can see exactly how the compiler gets called. The config file is required only if you use a library that depends on it. As one example among many, if you create an app that integrates with the Amazon AWS .NET SDK, it expects some information about your AWS account to be present in that file. The assembly file is fairly small, and we will integrate it in our main source file in a little bit. So now that we have an idea of what a project looks like, let's make our own!</p>
+<h3>Our console app</h3>
+<p>Create a new file and call it <code>helloworld.cs</code>. You can save it anywhere you want, and use any text editor. Since you're interested in editing code without using an IDE, I'm going to assume you already have a favorite text editor. In that file, put the following:</p>
+<pre><code>using System;
+
+namespace HelloWorld
+{
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(&quot;Hello world!&quot;);
+        }
+    }
+}
+</code></pre>
+
+<p>As you can see, this is pretty simple code. You could easily write it in a single line. We're not going to cover C# as there are plenty of tutorials online, but basically we're importing a resource, which is the <code>System</code> library that comes by default with Windows, then doing an API call in our main function to the <code>Console.WriteLine</code> method to write text on the screen as soon as the app starts.</p>
+<p>Of course, it doesn't do much yet, it's simply a typical sample project that writes <em>Hello world!</em> on the screen, but it's a good starting place. Now, compiling this is just as simple. Locate the compiler binary in the .NET Framework folder from earlier, and specify the output you want with the <code>/out:</code> parameter, followed by the name of your source file in a command prompt. It should parse and create your binary, which you can then run from the command line:</p>
+<pre><code>E:\code&gt; C:\Windows\Microsoft.NET\Framework\v3.5\csc.exe /out:helloworld.exe helloworld.cs
+Microsoft (R) Visual C# 2008 Compiler version 3.5.30729.5420
+for Microsoft (R) .NET Framework version 3.5
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+E:\code&gt; helloworld
+Hello world!
+
+E:\code&gt;
+</code></pre>
+
+<p>Not bad for the creation of a fully functional Windows binary, isn't it? No need for massive tools, wrappers, SDKs, libraries, and so on. Just a text editor and a few lines of code. The resulting binary should be around <em>4KB</em> which isn't bad either.</p>
+<h3>Adding assembly information</h3>
+<p>Open a file browser, locate your new <code>.exe</code> file, and right click on it. Go to <em>Properties</em>, and <em>Details</em>. There, you should see things like <em>File Description</em>, <em>Version</em> and <em>Copyright</em> information. Right now, they are empty. Usually, you fill those in by going in the Visual Studio menus and going through the proper wizard. But we're doing things the fun way, so let's add that in. All of these properties are defined with assembly values.</p>
+<p>Edit your <code>helloworld.cs</code> to look like this:</p>
+<pre><code>using System;
+using System.Reflection;
+[assembly: AssemblyTitle(&quot;Hello World Application&quot;)]
+[assembly: AssemblyCopyright(&quot;(C) 2015 John Doe&quot;)]
+[assembly: AssemblyFileVersion(&quot;1.0&quot;)]
+
+namespace HelloWorld
+{
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(&quot;Hello world!&quot;);
+        }
+    }
+}
+</code></pre>
+
+<p>As you can see, we added a reference to <code>System.Reflection</code> then a few definitions. Obviously you can use your name here, or type in any values you desire. Save the file and compile it again. Now, when you go right click on your binary, you will see the details filled in.</p>
+<h3>Our graphical app</h3>
+<p>You may now be thinking that sure, making console apps is easy, but surely there's no way to create graphical applications without an IDE, right?</p>
+<p>Let's upgrade our hello world app to show our message in a graphical fashion. Windows actually has several different libraries to display graphics. Right now, Microsoft is pushing a technology called <em>XAML</em> to create universal apps, which use XML files to define the design of the app. But for now, we'll use <em>Windows Forms</em>, which is the most popular and widely used way to create desktop apps.</p>
+<p>Edit your <code>helloworld.cs</code> to look like this:</p>
+<pre><code>using System;
+using System.Reflection;
+using System.Windows.Forms;
+[assembly: AssemblyTitle(&quot;Hello World Application&quot;)]
+[assembly: AssemblyCopyright(&quot;(C) 2015 John Doe&quot;)]
+[assembly: AssemblyFileVersion(&quot;1.0&quot;)]
+
+namespace HelloWorld
+{
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            MessageBox.Show(&quot;Hello world!&quot;, &quot;Hi!&quot;);
+        }
+    }
+}
+</code></pre>
+
+<p>As you can see, it's pretty similar to the previous version. All we're doing is importing the <code>System.Windows.Forms</code> library, and making a different API call, this time to the <code>MessageBox.Show</code> method. We've also added a title to the message box, so when you compile and run the app, the window will have a title. Windows handles everything else, from the creation of the graphical window, the close button, centering it in the middle of the screen, etc.</p>
+<p>Here's what the result looks like:</p>
+<p><img src="http://i.imgur.com/xuhYggE.jpg" /></p>
+<p>You could actually create fully functional UIs with menus, buttons and labels this way, and can find more information about the various API calls on the <a href="https://msdn.microsoft.com/en-us/library/System.Windows.Forms%28v=vs.90%29.aspx">MSDN Library</a>.</p>
+<p>Oh and if you're making an app that only uses the GUI, then you don't need a console. For your compile line, add the parameter <code>/target:winexe</code> just before the name of your source file. That way, when you double click on the app, you won't have an empty console window appearing. This is basically the difference between creating a console app and a Windows Forms app inside of VS, this one little compile option.</p>
+<h3>Importing third party libraries</h3>
+<p>You now have a good idea of how the .NET building process occurs, and see that you can create, compile and run .NET apps written in C# on any Windows PC with the Microsoft .NET Framework installed, leveraging the full range of the .NET APIs, without the need for any specific development tool. How useful that knowledge is can be up for debate, but I for one think it's pretty cool.</p>
+<p>Now let's see one last option which may be useful should you ever want to use third party libraries. Our compiling has been pretty simple because the libraries we've used so far include solely default Windows API calls. You can do a whole lot with them, but sometimes you may want to use external resources. This also applies if you want to add custom parts, like data files. The way to include such references is with the <code>/r:</code> option. Here's a simple app which sends a SNS notification using the Amazon AWS SDK, just as an example:</p>
+<pre><code>using System;
+using Amazon;
+using Amazon.SimpleNotificationService;
+using Amazon.SimpleNotificationService.Model;
+
+namespace AwsSnsSample
+{
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            var sns = new AmazonSimpleNotificationServiceClient();
+            sns.Publish(new PublishRequest
+            {
+                Subject = &quot;Hi!&quot;,
+                Message = &quot;Hello world!&quot;,
+                TopicArn = &quot;arn:aws:sns:us-west-2:0000000000:snstest1&quot;
+            });
+        }
+    }
+}
+</code></pre>
+
+<p>This is only a sample and could benefit from error handling and so on, but it will serve for now. To compile this code, you first need to install the <a href="http://aws.amazon.com/sdk-for-net/">AWS SDK</a> and setup the proper IAM credentials for the message to go through. Then, to compile it, you simply need to reference the right library as part of your command line:</p>
+<pre><code>E:\code&gt; C:\Windows\Microsoft.NET\Framework\v3.5\csc.exe /out:helloworld.exe /r:&quot;C:\Program Files (x86)\AWS SDK for .NET\bin\Net35\AWSSDK.dll&quot; helloworld.cs
+</code></pre>
+
+<h3>Visual Studio Code</h3>
+<p>Recently, Microsoft actually introduced a new version of Visual Studio called <a href="https://code.visualstudio.com">Code</a>, which is a lightweight editor that comes without any of the overhead IDE parts. It's around <em>100MB</em> as opposed to <em>6GB</em> of the full Community version. This is a perfect text editor to use alongside the knowledge shown here. You can integrate it with Git and use a custom build script with the commands we've seen to compile your code at the touch of a key.</p>
+<h3>Conclusion</h3>
+<p>I'm not really expecting professional developers to start doing things manually like this. There are many benefits of using an IDE like Visual Studio, including a graphical form builder, source code control, wizards, and so on. But there are many people out there who aren't full time developers, and who aren't willing or can't setup a full development environment. Yet should you wish to learn a bit of C# and play with the .NET API calls, you can see how trivial it is to create full fledged Windows binaries with just a single command line.</p>
+<p>Hopefully you've learned something and found this tutorial entertaining.</p>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
